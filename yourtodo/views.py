@@ -16,7 +16,7 @@ def signupuser(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                redirect('currenttodos')
+                return redirect('currenttodos')
             except IntegrityError:
                 return render(request, 'yourtodo/signup.html',
                               {'form': UserCreationForm(), 'error': 'That username has already has taken, Please '
@@ -27,4 +27,4 @@ def signupuser(request):
 
 
 def currenttodos(request):
-    return render(request,'yourtodo/currenttodos.html')
+    return render(request, 'yourtodo/currenttodos.html')
