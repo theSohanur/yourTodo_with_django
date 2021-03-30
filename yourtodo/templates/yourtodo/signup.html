@@ -1,3 +1,4 @@
+{% extends 'yourtodo/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <title>Title</title>
 </head>
 <body>
+{% block content %}
  <h2>SignUp</h2>
  <h4>{{ error }}</h4>
  <form method="POST">
@@ -12,6 +14,7 @@
      {{ form.as_p}}
      <button type="submit">Sign Up</button>
  </form>
+{% endblock %}
 
 </body>
 </html>

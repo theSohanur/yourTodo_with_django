@@ -2,10 +2,13 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 
 # Create your views here.
+def home(request):
+    return render(request, 'yourtodo/home.html')
+
 
 def signupuser(request):
     if request.method == 'GET':
@@ -19,11 +22,17 @@ def signupuser(request):
                 return redirect('currenttodos')
             except IntegrityError:
                 return render(request, 'yourtodo/signup.html',
-                              {'form': UserCreationForm(), 'error': 'That username has already has taken, Please '
+                              {'form': UserCreationForm(), 'error': 'That username has already been taken, Please '
                                                                     'choose a new Username.'})
         else:
             return render(request, 'yourtodo/signup.html',
                           {'form': UserCreationForm(), 'error': 'Password did not Match'})
+
+
+def logoutuser(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
 
 
 def currenttodos(request):
